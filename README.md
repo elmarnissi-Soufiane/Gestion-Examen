@@ -65,6 +65,7 @@
     symfony console make:auth
   
       Choose 1 for creating a login form authenticator.
+      1 AppAuthenticator SecurityController yes
   
   3.4. Create a registration system:
   
