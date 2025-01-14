@@ -70,6 +70,7 @@
   3.4. Create a registration system:
   
     symfony console make:registration
+            yes -> no -> yes
   
   3.5. Install the password reset bundle:
   
