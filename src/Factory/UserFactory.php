@@ -12,15 +12,14 @@ use Zenstruck\Foundry\Persistence\ProxyRepositoryDecorator;
 /**
  * @extends PersistentProxyObjectFactory<User>
  */
-final class UserFactory extends PersistentProxyObjectFactory{
+final class UserFactory extends PersistentProxyObjectFactory
+{
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
      *
      * @todo inject services if required
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public static function class(): string
     {
@@ -35,11 +34,12 @@ final class UserFactory extends PersistentProxyObjectFactory{
     protected function defaults(): array|callable
     {
         return [
-            'email' => self::faker()->text(180),
-            'is_verified' => self::faker()->boolean(),
-            'locale' => self::faker()->text(10),
-            'password' => self::faker()->text(),
-            'roles' => [],
+            'email' => "admin@soufiane.ma",
+            'roles' => ['ROLE_ADMIN'],
+            'password' => '$2y$13$w7usfxJhm1MP8qjT8TDNzOq.UuYWFuZszfwqX/agMwG8JeqWgacZ.',
+            'username' => 'Admin',
+            'locale' => 'fr',
+            'is_verified' => 1
         ];
     }
 

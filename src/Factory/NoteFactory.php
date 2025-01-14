@@ -2,6 +2,7 @@
 
 namespace App\Factory;
 
+use App\Entity\Etudiant;
 use App\Entity\Note;
 use App\Repository\NoteRepository;
 use Doctrine\ORM\EntityRepository;
@@ -12,15 +13,14 @@ use Zenstruck\Foundry\Persistence\ProxyRepositoryDecorator;
 /**
  * @extends PersistentProxyObjectFactory<Note>
  */
-final class NoteFactory extends PersistentProxyObjectFactory{
+final class NoteFactory extends PersistentProxyObjectFactory
+{
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
      *
      * @todo inject services if required
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public static function class(): string
     {
@@ -35,10 +35,12 @@ final class NoteFactory extends PersistentProxyObjectFactory{
     protected function defaults(): array|callable
     {
         return [
-            'etudiant' => null, // TODO add App\Entity\etudiant type manually
-            'module' => null, // TODO add App\Entity\module type manually
+            // 'etudiant' => null, // TODO add App\Entity\etudiant type manually
+            // 'module' => null, // TODO add App\Entity\module type manually
             'note' => self::faker()->randomFloat(),
-            'observation' => self::faker()->text(255),
+            'observation' => self::faker()->realText(255),
+            'etudiant' => EtudiantFactory::randomOrCreate(),
+            'module' => ModuleFactory::randomOrCreate(),
         ];
     }
 

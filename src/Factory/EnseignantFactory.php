@@ -12,15 +12,14 @@ use Zenstruck\Foundry\Persistence\ProxyRepositoryDecorator;
 /**
  * @extends PersistentProxyObjectFactory<Enseignant>
  */
-final class EnseignantFactory extends PersistentProxyObjectFactory{
+final class EnseignantFactory extends PersistentProxyObjectFactory
+{
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
      *
      * @todo inject services if required
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public static function class(): string
     {
@@ -35,9 +34,9 @@ final class EnseignantFactory extends PersistentProxyObjectFactory{
     protected function defaults(): array|callable
     {
         return [
-            'cin' => self::faker()->text(15),
-            'nom' => self::faker()->text(50),
-            'prenom' => self::faker()->text(50),
+            'cin' => self::faker()->realText(15),
+            'nom' => self::faker()->lastName(),
+            'prenom' => self::faker()->firstName(),
         ];
     }
 
