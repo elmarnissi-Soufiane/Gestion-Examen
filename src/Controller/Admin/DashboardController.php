@@ -8,6 +8,17 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
+use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
+use Symfony\Component\Security\Core\User\UserInterface;
+use App\Entity\Etudiant;
+use App\Entity\Filiere;
+use App\Entity\Note;
+use App\Entity\Enseignant;
+use App\Entity\Module;
+use App\Entity\Semestre;
+use App\Entity\User;
+
 class DashboardController extends AbstractDashboardController
 {
     #[Route('/admin', name: 'admin')]
@@ -35,12 +46,53 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Demo Symfony');
+            ->setTitle('Gestion Examens'); // soufiane
     }
+
+    // Soufiane
+
+    public function configureUserMenu(UserInterface $user): UserMenu
+    {
+
+        // Cast to the concrete User class to access getEmail()
+        if ($user instanceof User) {
+            $email = $user->getEmail(); // Now this will work
+        } else {
+            $email = null; // or handle it accordingly
+        }
+
+        return parent::configureUserMenu($user)
+            ->setName($user->getUserIdentifier())
+            ->setGravatarEmail($email)
+            //   ->setAvatarUrl('https://www.clipartmax.com/png/full/405-4050774_avatar-icon-flat-icon-shop-download-free-icons-for-avatar-icon-flat.png')
+            ->displayUserAvatar(true);
+    }
+
+
+
+    public function configureAssets(): Assets
+    {
+        return Assets::new()->addCssFile('build/css/admin.css');
+    }
+
+    // Soufiane
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+
+        // Ajouter les liens vers les différentes entités vres classe
+        // Soufiane
+
+        yield MenuItem::linkToCrud('Filiere', 'fas fa-list', Filiere::class);
+        yield MenuItem::linkToCrud('Semestre', 'fas fa-list', Semestre::class);
+        yield MenuItem::linkToCrud('Enseignant', 'fas fa-list', Enseignant::class);
+
+        yield MenuItem::linkToCrud('Module', 'fas fa-list', Module::class);
+        yield MenuItem::linkToCrud('Etudiant', 'fas fa-list', Etudiant::class);
+        yield MenuItem::linkToCrud('Note', 'fas fa-list', Note::class);
+
+        yield MenuItem::linkToCrud('User', 'fas fa-list', User::class);
     }
 }
