@@ -21,6 +21,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addEntry('langues', './assets/js/langues.js') // soufiane
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -53,8 +54,30 @@ Encore
         config.corejs = '3.38';
     })
 
+    // soufiane
+    // ajouter les procedure à webpack.config
+    .copyFiles({
+        from: './assets/images',
+
+        // optional target path, relative to the output dir
+        to: 'images/[path][name].[ext]',
+
+        // if versioning is enabled, add the file hash too
+        //to: 'images/[path][name].[hash:8].[ext]',
+
+        // only copy files matching this pattern
+        //pattern: /\.(png|jpg|jpeg)$/
+    })
+
+    .copyFiles({
+        from: './assets/css',
+        to: 'css/[path][name].[ext]',
+    })
+
+    // soufiane
+
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    .enableSassLoader() // soufiane
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
@@ -67,7 +90,7 @@ Encore
     //.enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
-;
+    .autoProvidejQuery() // soufiane
+    ;
 
 module.exports = Encore.getWebpackConfig();
