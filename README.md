@@ -128,6 +128,7 @@
   6.1. Install EasyAdminBundle:
   
     composer require admin
+    composer require easycorp/easyadmin-bundle
   
   6.2. Create a dashboard:
   
